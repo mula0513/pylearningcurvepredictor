@@ -56,9 +56,9 @@ def cut_beginning(y, threshold=0.05, look_ahead=5):
 
 def get_xlim():
     cwd=os.getcwd()
-    assert os.path.isfile(cwd+"/network_solver.prototxt")
+    assert os.path.isfile(cwd+"/arm1/network_solver.prototxt")
     solver = caffe_pb2.SolverParameter()
-    solver_txt = open(cwd+"/network_solver.prototxt").read()
+    solver_txt = open(cwd+"/arm1/network_solver.prototxt").read()
     try:
         google.protobuf.text_format.Merge(solver_txt, solver)
     except Exception as e:
