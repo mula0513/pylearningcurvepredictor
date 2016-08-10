@@ -55,19 +55,16 @@ def cut_beginning(y, threshold=0.05, look_ahead=5):
 
 
 def get_xlim():
-    assert os.path.exists("caffenet_solver.prototxt")
+    assert os.path.exists("network_solver.prototxt")
     solver = caffe_pb2.SolverParameter()
-    solver_txt = open("caffenet_solver.prototxt").read()
+    solver_txt = open("network_solver.prototxt").read()
     try:
         google.protobuf.text_format.Merge(solver_txt, solver)
     except Exception as e:
-        #this may happen if fields are added. However everything else should be parse
-        #hence, it's ok to be ignored
         print "error parsing solver: ", str(e)
     assert solver.max_iter > 0
     assert solver.test_interval > 0
-    return solver.max_iter / float(solver.test_interval)
-
+    return solver.max_iter / float(400)
 
 class TerminationCriterion(object):
     def __init__(self, nthreads, prob_x_greater_type):
